@@ -111,9 +111,11 @@ var currentWind;
 var currentHumidity;
 var currentUVindex;
 
+var forecastData;
+
 function printCurrentDataToDisplay () {
-  currentCityEl = cityName;
-  currentDateEl = 
+  // currentCityEl = cityName;
+  // currentDateEl = 
   currentTempEl.textContent = currentTemp;
   currentWindEl.textContent = currentWind;
   currentHumidityEl.textContent = currentHumidity;
@@ -131,7 +133,7 @@ function distributeCurrentData (w) {
 };
 
 function distributeForecastData (f) {
-  console.log("works so far!")
+  console.log("works so far!");
 }
 
 function pullAllWeatherData () {
