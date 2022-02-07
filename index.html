@@ -29,20 +29,20 @@
         <div id="search-container" class="col-2 container-sm">
           <div class="ms-5">
             <label for="city-search" class="form-label">City</label>
-            <input type="city" class="form-control" id="city-input" aria-describedby="city">
+            <input type="city" class="form-control" id="user-input" aria-describedby="city">
             <div id="city" class="form-text">City, State</div>
           </div>
-          <button type="button" class="ms-5 btn btn-primary btn-lg">Search Now</button>
+          <button type="button" id="search-button" class="ms-5 btn btn-primary btn-lg">Search Now</button>
           <div id="recent-searches-container" class="mt-5 container-sm">
             <h2>Recently-Searched Cities:</h2>
-            <button type="button" class="btn btn-outline-primary"><span id="city1"></span></button>
-            <button type="button" class="btn btn-outline-primary"><span id="city2"></span></button>
-            <button type="button" class="btn btn-outline-primary"><span id="city3"></span></button>
-            <button type="button" class="btn btn-outline-primary"><span id="city4"></span></button>
-            <button type="button" class="btn btn-outline-primary"><span id="city5"></span></button>
-            <button type="button" class="btn btn-outline-primary"><span id="city6"></span></button>
-            <button type="button" class="btn btn-outline-primary"><span id="city7"></span></button>
-            <button type="button" class="btn btn-outline-primary"><span id="city8"></span></button>
+            <button id="city1-btn" type="button" class="btn btn-outline-primary"><span id="city1-txt"></span></button>
+            <button id="city2-btn" type="button" class="btn btn-outline-primary"><span id="city2-txt"></span></button>
+            <button id="city3-btn" type="button" class="btn btn-outline-primary"><span id="city3-txt"></span></button>
+            <button id="city4-btn" type="button" class="btn btn-outline-primary"><span id="city4-txt"></span></button>
+            <button id="city5-btn" type="button" class="btn btn-outline-primary"><span id="city5-txt"></span></button>
+            <button id="city6-btn" type="button" class="btn btn-outline-primary"><span id="city6-txt"></span></button>
+            <button id="city7-btn" type="button" class="btn btn-outline-primary"><span id="city7-txt"></span></button>
+            <button id="city8-btn" type="button" class="btn btn-outline-primary"><span id="city8-txt"></span></button>
           </div>
         </div>
         <div id="weather-info-container" class="col container-lg">
@@ -57,7 +57,7 @@
             <h2>5-Day Forecast:</h2>
             <div class="forecast-cards row row-cols-1 row-cols-md-5 g-4">
               <div id="day-1" class="card">
-                <img src="..." class="card-img-top" alt="...">
+                <img id="day-1-img" src="" class="card-img-top" alt="">
                 <div class="card-body">
                   <h5 class="card-title"><span id="d1-day"></span></h5>
                   <p class="card-text"><span id="d1-temp"></span><br><span id="d1-wind"></span><br><span id="d1-hum"></span></p>
@@ -67,7 +67,7 @@
                 </div>
               </div>
               <div id="day-2" class="card">
-                <img src="..." class="card-img-top" alt="...">
+                <img id="day-2-img" src="" class="card-img-top" alt="">
                 <div class="card-body">
                   <h5 class="card-title"><span id="d1-day"></span></h5>
                   <p class="card-text"><span id="d2-temp"></span><br><span id="d2-wind"></span><br><span id="d2-hum"></span></p>
@@ -77,7 +77,7 @@
                 </div>
               </div>
               <div id="day-3" class="card">
-                <img src="..." class="card-img-top" alt="...">
+                <img id="day-3-img" src="" class="card-img-top" alt="">
                 <div class="card-body">
                   <h5 class="card-title"><span id="d3-day"></span></h5>
                   <p class="card-text"><span id="d3-temp"></span><br><span id="d3-wind"></span><br><span id="d3-hum"></span></p>
@@ -87,7 +87,7 @@
                 </div>
               </div>
               <div id="day-4" class="card">
-                <img src="..." class="card-img-top" alt="...">
+                <img id="day-4-img" src="" class="card-img-top" alt="">
                 <div class="card-body">
                   <h5 class="card-title"><span id="d4-day"></span></h5>
                   <p class="card-text"><span id="d4-temp"></span><br><span id="d4-wind"></span><br><span id="d4-hum"></span></p>
@@ -97,7 +97,7 @@
                 </div>
             </div>
             <div id="day-5" class="card">
-              <img src="..." class="card-img-top" alt="...">
+              <img id="day-5-img" src="" class="card-img-top" alt="">
               <div class="card-body">
                 <h5 class="card-title"><span id="d5-day"></span></h5>
                 <p class="card-text"><span id="d5-temp"></span><br><span id="d5-wind"></span><br><span id="d5-hum"></span></p>
