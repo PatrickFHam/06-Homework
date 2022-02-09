@@ -33,11 +33,11 @@ var day3CardEl = document.getElementById("d3-card");
 var day4CardEl = document.getElementById("d4-card");
 var day5CardEl = document.getElementById("d5-card");
 
-var day1ImgEl = document.getElementById("d1-img");
-var day2ImgEl = document.getElementById("d2-img");
-var day3ImgEl = document.getElementById("d3-img");
-var day4ImgEl = document.getElementById("d4-img");
-var day5ImgEl = document.getElementById("d5-img");
+var day1ImgEl = document.getElementById("day-1-img");
+var day2ImgEl = document.getElementById("day-2-img");
+var day3ImgEl = document.getElementById("day-3-img");
+var day4ImgEl = document.getElementById("day-4-img");
+var day5ImgEl = document.getElementById("day-5-img");
 
 var day1DayEl = document.getElementById("d1-day");
 var day2DayEl = document.getElementById("d2-day");
@@ -81,6 +81,7 @@ var imgRain = "./assets/images/rain.jpg";
 var imgSnow = "./assets/images/snow.jpg";
 var imgSunny = "./assets/images/sunny.jpg";
 var imgThunderstorm = "./assets/images/thunderstorm.jpg";
+var imgFoggy = "./assets/images/foggy.jpg"
 var imgOther = "./assets/images/tornado.jpg";
 
 var emojiMostlyCloudy = "fas fa-cloud-sun";
@@ -181,8 +182,6 @@ function getForecastedHighs() {
   day4DateEl.textContent = (moment().add(4, 'days').format("MMM Do YY"));
   day5DateEl.textContent = (moment().add(5, 'days').format("MMM Do YY"));
 
-
-  
   // TEMPS
   day1Temps = [
     forecastData.list[0].main.temp,
@@ -369,6 +368,23 @@ function getForecastedHighs() {
   displayForecastedHighs();
 }
 
+function runConditionalFormatting() {
+  console.log(currentData.current.uvi);
+  currentUvEl.className = "";
+
+  if (currentData.current.uvi <= 3.00) {
+    currentUvEl.classList.add("btn", "btn-primary");
+  } else if (currentData.current.uvi > 3.00 && currentData.current.uvi <= 7.00) {
+    currentUvEl.classList.add("btn", "btn-warning");
+  } else if (currentData.current.uvi > 7.00) {
+    currentUvEl.classList.add("btn", "btn-danger");
+  }
+  currentUvEl.classList.add("btn", "btn-dark");
+  /* if (currentData.current.weather[0].main = "Fog") {
+    
+  } */
+}
+
 
 function printCurrentDataToDisplay () {
   console.log("printing the data to the screen");
@@ -380,6 +396,19 @@ function printCurrentDataToDisplay () {
   currentCityEl.textContent = cityName;
   console.log("FINISHED printing the data to the screen");
   clearAllInputs();
+  // setTimeout(runConditionalFormatting(), 200);
+
+  console.log(currentUVindex);
+  currentUvEl.className = "";
+
+  if (currentUVindex <= 3.00) {
+    currentUvEl.classList.add("btn", "btn-primary");
+  } else if (currentUVindex > 3.00 && currentData.current.uvi <= 7.00) {
+    currentUvEl.classList.add("btn", "btn-warning");
+  } else if (currentUVindex > 7.00) {
+    currentUvEl.classList.add("btn", "btn-danger");
+  } else {currentUvEl.classList.add("btn", "btn-dark");}
+  return;
 }
 
 function distributeCurrentData (w) {
@@ -420,7 +449,7 @@ function pullAllWeatherData () {
     console.log(forecastData);
     console.log("city typed in is " + forecastData.city.name);
     cityName = forecastData.city.name;
-    distributeForecastData(forecastData);
+    distributeForecastData();
   })
 };
 
