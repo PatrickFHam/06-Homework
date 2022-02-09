@@ -92,7 +92,7 @@ var emojiThunderstorm = "fas fa-bolt";
 var emojiOther = "fas fa-cloud-meatball";
 
 const apiKey = "52828bd95a263fd4260316440728f92b";
-var userInput;
+var userInput = '';
 var city;
 var state;
 var countryCode = "us";
@@ -109,6 +109,7 @@ var dataFromZIP;
 var latitude;
 var longitude;
 
+var cityStateArr = [];
 var currentData;
 var cityName;
 var currentDate = moment().format('llll');
@@ -121,6 +122,20 @@ var currentUVindex;
 var forecastData;
 
 var forecastedHighTemps = [];
+
+// var unixTimeStamp = [data].current.dt
+// var event = new Date(unixTimeStamp * 1000);
+// var options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+// var humanDateFormat = event.toLocaleDateString(options);
+
+
+var forecastDay1Date = new Date()
+var forecastDay2Date = new Date()
+var forecastDay3Date = new Date()
+var forecastDay4Date = new Date()
+var forecastDay5Date = new Date()
+
+
 
 var day1Temps = [];
 var day2Temps = [];
@@ -154,6 +169,20 @@ function displayForecastedHighs() {
 }
 
 function getForecastedHighs() {
+  // DAYS AND DATES
+  day1DayEl.textContent = (moment().add(1, 'days').format("dddd"));
+  day2DayEl.textContent = (moment().add(2, 'days').format("dddd"));
+  day3DayEl.textContent = (moment().add(3, 'days').format("dddd"));
+  day4DayEl.textContent = (moment().add(4, 'days').format("dddd"));
+  day5DayEl.textContent = (moment().add(5, 'days').format("dddd"));
+  day1DateEl.textContent = (moment().add(1, 'days').format("MMM Do YY"));
+  day2DateEl.textContent = (moment().add(2, 'days').format("MMM Do YY"));
+  day3DateEl.textContent = (moment().add(3, 'days').format("MMM Do YY"));
+  day4DateEl.textContent = (moment().add(4, 'days').format("MMM Do YY"));
+  day5DateEl.textContent = (moment().add(5, 'days').format("MMM Do YY"));
+
+
+  
   // TEMPS
   day1Temps = [
     forecastData.list[0].main.temp,
@@ -341,7 +370,6 @@ function getForecastedHighs() {
 }
 
 
-
 function printCurrentDataToDisplay () {
   console.log("printing the data to the screen");
   currentDateEl.textContent = currentDate;
@@ -351,6 +379,7 @@ function printCurrentDataToDisplay () {
   currentUvEl.textContent = currentUVindex;
   currentCityEl.textContent = cityName;
   console.log("FINISHED printing the data to the screen");
+  clearAllInputs();
 }
 
 function distributeCurrentData (w) {
@@ -361,7 +390,7 @@ function distributeCurrentData (w) {
   currentUVindex = w.current.uvi;
   console.log("distributed current data");
   setTimeout(printCurrentDataToDisplay(), 500);
-  getForecastedHighs();
+  setTimeout(getForecastedHighs(), 200);
 };
 
 function distributeForecastData (f) {
@@ -420,9 +449,11 @@ function getDataFromZIP (zip) {
     .then(function (zipData) {
       dataFromZIP = zipData;
       console.log(dataFromZIP);
-      if (dataFromZIP.message == "city not found") {
+      if (dataFromZIP.cod == "404" || dataFromZIP.message == "city not found") {
         // PUT A MODAL INSTRUCTION HERE
         console.log("The city you gave cannot be found. Check your spelling...?");
+        showErrorModal();
+        return;
       };
       makeLatLonFromZIP(dataFromZIP);
       return dataFromZIP;
@@ -438,23 +469,27 @@ function getDataFromCityState (cS) {
   .then(function (data) {
     dataFromCityState = data;
     console.log(dataFromCityState);
-    if (dataFromCityState.message == "city not found") {
-      // PUT A MODAL INSTRUCTION HERE
+    if (dataFromCityState.cod == "404" || dataFromCityState.message == "city not found") {
       console.log("The city you gave cannot be found. Check your spelling...?");
-    };
-    makeLatLonFromCityState(dataFromCityState);
+      showErrorModal();
+    } else {
+      makeLatLonFromCityState(dataFromCityState);
+    }
     return dataFromCityState;
   });
 };
 
+
 function convertUserInput () {
-  var cityStateArr
-  userInput = userInputEl.value;
+  cityStateArr = [];
+  // userInput = userInputEl.value;
   cityStateArr = userInput.split(",");
   city = cityStateArr[0];
   state = cityStateArr[1].replace(/ /g, '');
   cityState = city + "," + state + "," + countryCode;
-  return cityState;
+  // return cityState;
+  // cityState = userInput;
+  getDataFromCityState(cityState);
 };
 
 function runWithZIP (z) {
@@ -463,30 +498,43 @@ function runWithZIP (z) {
 
 function runWithCityState () {
   convertUserInput();
-  getDataFromCityState(cityState);
 };
 
 function storeUserInput () {
-  userInput = userInputEl.value;
+  console.log("re-declaring that user input is: " + userInput);
   if (!isNaN(userInput)) {
     zipCode = userInput.toString(5);
     console.log("The ZIP Code is: " + zipCode + ".");
-    // THIS IS WHERE LOCAL STORAGE ZIP CODE WILL GO
+    localStorage.setItem("lsMostRecentWeatherSearch", zipCode);
+    mostRecentSearch = localStorage.getItem("lsMostRecentWeatherSearch");
+    storeSearch();
     runWithZIP(zipCode);
+  } else if (userInput.includes(",") == false) {
+      showErrorModal();
+      return;
+  } else if (userInput.includes(",") == true) {
+    console.log("Passed the tests, and the city name is: " + userInput + ".");
+    localStorage.setItem("lsMostRecentWeatherSearch", userInput);
+    mostRecentSearch = localStorage.getItem("lsMostRecentWeatherSearch");
+    storeSearch();
+    runWithCityState();
   } else {
-  console.log("The city name is: " + userInput + ".");
-  // THIS IS WHERE LOCAL STORAGE CITY NAME WILL GO
-  runWithCityState();
-  }
-};
+    console.log("input is unknown");
+    clearAllInputs();
+    showErrorModal();
+    return userInput;
+    };
+  };
 
 function runApp () {
+  displaySearchHistory();
   storeUserInput();
 };
 
 searchButtonEl.onclick = function() {
   console.log("clicked SEARCH")
   console.log("input is " + userInputEl.value);
+  userInput = userInputEl.value;
   runApp();
 };
 
@@ -496,3 +544,58 @@ userInputEl.addEventListener("keyup", function(event) {
    searchButtonEl.click();
   };
 });
+
+searchedCityButton1El.onclick = function () {userInput = storedSearches[0]; runApp();}
+searchedCityButton2El.onclick = function () {userInput = storedSearches[1]; runApp();}
+searchedCityButton3El.onclick = function () {userInput = storedSearches[2]; runApp();}
+searchedCityButton4El.onclick = function () {userInput = storedSearches[3]; runApp();}
+searchedCityButton5El.onclick = function () {userInput = storedSearches[4]; runApp();}
+searchedCityButton6El.onclick = function () {userInput = storedSearches[5]; runApp();}
+searchedCityButton7El.onclick = function () {userInput = storedSearches[6]; runApp();}
+searchedCityButton8El.onclick = function () {userInput = storedSearches[7]; runApp();}
+
+
+function showErrorModal () {
+  clearAllInputs();
+  displaySearchHistory();
+  errorInputModal.toggle();
+}
+
+var errorInputModal = new bootstrap.Modal(document.getElementById('bad-input-modal'))
+var tryAgainBtnEl = document.getElementById("try-again-btn");
+var userInputAgainEl = document.getElementById("user-input-again");
+
+var storedSearches = JSON.parse(localStorage.getItem("lsStoredWeatherSearches")) || [];
+var mostRecentSearch = localStorage.getItem("lsMostRecentWeatherSearch");
+
+function storeSearch () {
+  storedSearches.unshift(mostRecentSearch);
+  storedSearches.splice(8);
+  localStorage.setItem("lsStoredWeatherSearches", JSON.stringify(storedSearches));
+  displaySearchHistory();
+};
+
+function displaySearchHistory () {
+  searchedCityButton1El.textContent = storedSearches[0];
+  searchedCityButton2El.textContent = storedSearches[1];
+  searchedCityButton3El.textContent = storedSearches[2];
+  searchedCityButton4El.textContent = storedSearches[3];
+  searchedCityButton5El.textContent = storedSearches[4];
+  searchedCityButton6El.textContent = storedSearches[5];
+  searchedCityButton7El.textContent = storedSearches[6];
+  searchedCityButton8El.textContent = storedSearches[7];
+};
+
+function clearAllInputs () {
+  userInput = '';
+  userInputEl.textContent = '';
+  userInput.value = '';
+  userInputEl.value = '';
+}
+
+function onPageLoad () {
+  clearAllInputs();
+  displaySearchHistory();
+}
+
+onPageLoad();

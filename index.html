@@ -28,21 +28,21 @@
       <div class="row">
         <div id="search-container" class="col-2 container-sm">
           <div class="ms-5">
-            <label for="city-search" class="form-label">City</label>
+            <label for="city-search" class="form-label">City or ZIP Code</label>
             <input type="city" class="form-control" id="user-input" aria-describedby="city">
-            <div id="city" class="form-text">City, State</div>
+            <div id="city" class="form-text">Cities should have a comma and state name, or state abbreviation.</div>
           </div>
           <button type="button" id="search-button" class="ms-5 btn btn-primary btn-lg">Search Now</button>
           <div id="recent-searches-container" class="mt-5 container-sm">
             <h2>Recently-Searched Cities:</h2>
-            <button id="city1-btn" type="button" class="btn btn-outline-primary"><span id="city1-txt"></span></button>
-            <button id="city2-btn" type="button" class="btn btn-outline-primary"><span id="city2-txt"></span></button>
-            <button id="city3-btn" type="button" class="btn btn-outline-primary"><span id="city3-txt"></span></button>
-            <button id="city4-btn" type="button" class="btn btn-outline-primary"><span id="city4-txt"></span></button>
-            <button id="city5-btn" type="button" class="btn btn-outline-primary"><span id="city5-txt"></span></button>
-            <button id="city6-btn" type="button" class="btn btn-outline-primary"><span id="city6-txt"></span></button>
-            <button id="city7-btn" type="button" class="btn btn-outline-primary"><span id="city7-txt"></span></button>
-            <button id="city8-btn" type="button" class="btn btn-outline-primary"><span id="city8-txt"></span></button>
+            <button id="city1-btn" type="button" class="btn col-12 btn-outline-primary"><span id="city1-txt"></span></button>
+            <button id="city2-btn" type="button" class="btn col-12 btn-outline-primary"><span id="city2-txt"></span></button>
+            <button id="city3-btn" type="button" class="btn col-12 btn-outline-primary"><span id="city3-txt"></span></button>
+            <button id="city4-btn" type="button" class="btn col-12 btn-outline-primary"><span id="city4-txt"></span></button>
+            <button id="city5-btn" type="button" class="btn col-12 btn-outline-primary"><span id="city5-txt"></span></button>
+            <button id="city6-btn" type="button" class="btn col-12 btn-outline-primary"><span id="city6-txt"></span></button>
+            <button id="city7-btn" type="button" class="btn col-12 btn-outline-primary"><span id="city7-txt"></span></button>
+            <button id="city8-btn" type="button" class="btn col-12 btn-outline-primary"><span id="city8-txt"></span></button>
           </div>
         </div>
         <div id="weather-info-container" class="col container-lg">
@@ -69,7 +69,7 @@
               <div id="day-2" class="card">
                 <img id="day-2-img" src="" class="card-img-top" alt="">
                 <div class="card-body">
-                  <h5 class="card-title"><span id="d1-day"></span></h5>
+                  <h5 class="card-title"><span id="d2-day"></span></h5>
                   <p class="card-text"><span id="d2-temp"></span><br><span id="d2-wind"></span><br><span id="d2-hum"></span></p>
                 </div>
                 <div class="card-footer">
@@ -110,9 +110,36 @@
         </div>
       </div>
 
+      <!-- Modal -->
+      <div class="modal fade" id="bad-input-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">WOOPS! Input Error</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              The city or ZIP you submitted was not found. Please try again.<br>Your options are: <br> (1) 5-digit ZIP code, or <br> (2) a comma-separated city and state (City, State).
+            </div>
+            <!-- <form>
+              <div class="mb-3 ms-3 me-3">
+                <label for="recipient-name" class="col-form-label">ZIP or City, State:</label>
+                <input type="text" class="form-control" id="user-input-again">
+              </div>
+            </form> -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+              <!-- <button id="try-again-btn" type="button" class="btn btn-primary">Try Again Here</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
