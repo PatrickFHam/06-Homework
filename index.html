@@ -11,16 +11,16 @@
   </head>
   <body>
     
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <header class="bg-image d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom" style="background-image: url(./assets/images/other.jpg)">
       <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-        <h1 class="fs-4">Weather Dashboard</h1>
+        <h1 class="fs-4 btn btn-light btn-lg">Weather Dashboard</h1>
       </a>
 
       <ul class="nav nav-pills">
         <li class="nav-item"><a href="https://patrickfham.github.io/06-Homework" class="nav-link active" aria-current="page">Home</a></li>
-        <li class="nav-item"><a href="https://openweathermap.org/api" class="nav-link">API Info</a></li>
-        <li class="nav-item"><a href="" class="nav-link">About Me</a></li>
+        <li class="nav-item"><a href="https://openweathermap.org/api" target="_blank" class="nav-link">API Info</a></li>
+        <li class="nav-item"><a href="https://github.com/PatrickFHam" target="_blank" class="nav-link">About Me</a></li>
       </ul>
     </header>
 
@@ -57,7 +57,7 @@
             <h2>5-Day Forecast:</h2>
             <div class="forecast-cards row row-cols-1 row-cols-md-5 g-4">
               <div id="day-1" class="card">
-                <img id="day-1-img" src="" class="card-img-top" alt="">
+                <img id="day-1-img" src="" class="card-img img-fluid" alt="">
                 <div class="card-body">
                   <h5 class="card-title"><span id="d1-day"></span></h5>
                   <p class="card-text"><span id="d1-temp"></span><br><span id="d1-wind"></span><br><span id="d1-hum"></span></p>
@@ -67,7 +67,7 @@
                 </div>
               </div>
               <div id="day-2" class="card">
-                <img id="day-2-img" src="" class="card-img-top" alt="">
+                <img id="day-2-img" src="" class="card-img img-fluid" alt="">
                 <div class="card-body">
                   <h5 class="card-title"><span id="d2-day"></span></h5>
                   <p class="card-text"><span id="d2-temp"></span><br><span id="d2-wind"></span><br><span id="d2-hum"></span></p>
@@ -77,7 +77,7 @@
                 </div>
               </div>
               <div id="day-3" class="card">
-                <img id="day-3-img" src="" class="card-img-top" alt="">
+                <img id="day-3-img" src="" class="card-img img-fluid" alt="">
                 <div class="card-body">
                   <h5 class="card-title"><span id="d3-day"></span></h5>
                   <p class="card-text"><span id="d3-temp"></span><br><span id="d3-wind"></span><br><span id="d3-hum"></span></p>
@@ -87,7 +87,7 @@
                 </div>
               </div>
               <div id="day-4" class="card">
-                <img id="day-4-img" src="" class="card-img-top" alt="">
+                <img id="day-4-img" src="" class="card-img img-fluid" alt="">
                 <div class="card-body">
                   <h5 class="card-title"><span id="d4-day"></span></h5>
                   <p class="card-text"><span id="d4-temp"></span><br><span id="d4-wind"></span><br><span id="d4-hum"></span></p>
@@ -97,7 +97,7 @@
                 </div>
             </div>
             <div id="day-5" class="card">
-              <img id="day-5-img" src="" class="card-img-top" alt="">
+              <img id="day-5-img" src="" class="card-img img-fluid" alt="">
               <div class="card-body">
                 <h5 class="card-title"><span id="d5-day"></span></h5>
                 <p class="card-text"><span id="d5-temp"></span><br><span id="d5-wind"></span><br><span id="d5-hum"></span></p>

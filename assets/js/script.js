@@ -75,14 +75,11 @@ var day3HumidityEl = document.getElementById("d3-hum");
 var day4HumidityEl = document.getElementById("d4-hum");
 var day5HumidityEl = document.getElementById("d5-hum");
 
-var imgMostlyCloudy = "./assets/images/mostlycloudy.jpg";
-var imgMostlySunny = "./assets/images/mostlysunny.jpg";
-var imgRain = "./assets/images/rain.jpg";
-var imgSnow = "./assets/images/snow.jpg";
-var imgSunny = "./assets/images/sunny.jpg";
-var imgThunderstorm = "./assets/images/thunderstorm.jpg";
-var imgFoggy = "./assets/images/foggy.jpg"
-var imgOther = "./assets/images/tornado.jpg";
+var day1Desc = '';
+var day2Desc = '';
+var day3Desc = '';
+var day4Desc = '';
+var day5Desc = '';
 
 var emojiMostlyCloudy = "fas fa-cloud-sun";
 var emojiMostlySunny = "fas fa-cloud-sun";
@@ -124,19 +121,11 @@ var forecastData;
 
 var forecastedHighTemps = [];
 
-// var unixTimeStamp = [data].current.dt
-// var event = new Date(unixTimeStamp * 1000);
-// var options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-// var humanDateFormat = event.toLocaleDateString(options);
-
-
 var forecastDay1Date = new Date()
 var forecastDay2Date = new Date()
 var forecastDay3Date = new Date()
 var forecastDay4Date = new Date()
 var forecastDay5Date = new Date()
-
-
 
 var day1Temps = [];
 var day2Temps = [];
@@ -150,23 +139,23 @@ var day4HighTemp;
 var day5HighTemp;
 
 function displayForecastedHighs() {
-  day1TempEl.textContent = "Temp: " + day1HighTemp;
-  day2TempEl.textContent = "Temp: " + day2HighTemp;
-  day3TempEl.textContent = "Temp: " + day3HighTemp;
-  day4TempEl.textContent = "Temp: " + day4HighTemp;
-  day5TempEl.textContent = "Temp: " + day5HighTemp;
-
-  day1WindEl.textContent = "Wind: " + day1HighWind;
-  day2WindEl.textContent = "Wind: " + day2HighWind;
-  day3WindEl.textContent = "Wind: " + day3HighWind;
-  day4WindEl.textContent = "Wind: " + day4HighWind;
-  day5WindEl.textContent = "Wind: " + day5HighWind;
-
-  day1HumidityEl.textContent = "Humidity: " + day1HighHum;
-  day2HumidityEl.textContent = "Humidity: " + day2HighHum;
-  day3HumidityEl.textContent = "Humidity: " + day3HighHum;
-  day4HumidityEl.textContent = "Humidity: " + day4HighHum;
-  day5HumidityEl.textContent = "Humidity: " + day5HighHum;
+  day1TempEl.textContent = "Temp: " + day1HighTemp + "℉";
+  day2TempEl.textContent = "Temp: " + day2HighTemp + "℉";
+  day3TempEl.textContent = "Temp: " + day3HighTemp + "℉";
+  day4TempEl.textContent = "Temp: " + day4HighTemp + "℉";
+  day5TempEl.textContent = "Temp: " + day5HighTemp + "℉";
+  
+  day1WindEl.textContent = "Wind: " + day1HighWind + "mph";
+  day2WindEl.textContent = "Wind: " + day2HighWind + "mph";
+  day3WindEl.textContent = "Wind: " + day3HighWind + "mph";
+  day4WindEl.textContent = "Wind: " + day4HighWind + "mph";
+  day5WindEl.textContent = "Wind: " + day5HighWind + "mph";
+  
+  day1HumidityEl.textContent = "Humidity: " + day1HighHum + "%rh";
+  day2HumidityEl.textContent = "Humidity: " + day2HighHum + "%rh";
+  day3HumidityEl.textContent = "Humidity: " + day3HighHum + "%rh";
+  day4HumidityEl.textContent = "Humidity: " + day4HighHum + "%rh";
+  day5HumidityEl.textContent = "Humidity: " + day5HighHum + "%rh";
 }
 
 function getForecastedHighs() {
@@ -181,7 +170,7 @@ function getForecastedHighs() {
   day3DateEl.textContent = (moment().add(3, 'days').format("MMM Do YY"));
   day4DateEl.textContent = (moment().add(4, 'days').format("MMM Do YY"));
   day5DateEl.textContent = (moment().add(5, 'days').format("MMM Do YY"));
-
+  
   // TEMPS
   day1Temps = [
     forecastData.list[0].main.temp,
@@ -206,7 +195,7 @@ function getForecastedHighs() {
     forecastData.list[15].main.temp
   ];
   day2HighTemp = Math.max.apply(null, day2Temps);
-
+  
   day3Temps = [
     forecastData.list[16].main.temp,
     forecastData.list[17].main.temp,
@@ -218,7 +207,7 @@ function getForecastedHighs() {
     forecastData.list[23].main.temp
   ];
   day3HighTemp = Math.max.apply(null, day3Temps);
-
+  
   day4Temps = [
     forecastData.list[24].main.temp,
     forecastData.list[25].main.temp,
@@ -230,7 +219,7 @@ function getForecastedHighs() {
     forecastData.list[31].main.temp
   ];
   day4HighTemp = Math.max.apply(null, day4Temps);
-
+  
   day5Temps = [
     forecastData.list[32].main.temp,
     forecastData.list[33].main.temp,
@@ -242,7 +231,7 @@ function getForecastedHighs() {
     forecastData.list[39].main.temp
   ];
   day5HighTemp = Math.max.apply(null, day5Temps);
-
+  
   // WINDS
   day1Winds = [
     forecastData.list[0].wind.speed,
@@ -267,7 +256,7 @@ function getForecastedHighs() {
     forecastData.list[15].wind.speed
   ];
   day2HighWind = Math.max.apply(null, day2Winds);
-
+  
   day3Winds = [
     forecastData.list[16].wind.speed,
     forecastData.list[17].wind.speed,
@@ -279,7 +268,7 @@ function getForecastedHighs() {
     forecastData.list[23].wind.speed
   ];
   day3HighWind = Math.max.apply(null, day3Winds);
-
+  
   day4Winds = [
     forecastData.list[24].wind.speed,
     forecastData.list[25].wind.speed,
@@ -291,7 +280,7 @@ function getForecastedHighs() {
     forecastData.list[31].wind.speed
   ];
   day4HighWind = Math.max.apply(null, day4Winds);
-
+  
   day5Winds = [
     forecastData.list[32].wind.speed,
     forecastData.list[33].wind.speed,
@@ -303,7 +292,7 @@ function getForecastedHighs() {
     forecastData.list[39].wind.speed
   ];
   day5HighWind = Math.max.apply(null, day5Winds);
-
+  
   // HUMIDITIES
   day1Hums = [
     forecastData.list[0].main.humidity,
@@ -328,7 +317,7 @@ function getForecastedHighs() {
     forecastData.list[15].main.humidity
   ];
   day2HighHum = Math.max.apply(null, day2Hums);
-
+  
   day3Hums = [
     forecastData.list[16].main.humidity,
     forecastData.list[17].main.humidity,
@@ -340,7 +329,7 @@ function getForecastedHighs() {
     forecastData.list[23].main.humidity
   ];
   day3HighHum = Math.max.apply(null, day3Hums);
-
+  
   day4Hums = [
     forecastData.list[24].main.humidity,
     forecastData.list[25].main.humidity,
@@ -352,7 +341,7 @@ function getForecastedHighs() {
     forecastData.list[31].main.humidity
   ];
   day4HighHum = Math.max.apply(null, day4Hums);
-
+  
   day5Hums = [
     forecastData.list[32].main.humidity,
     forecastData.list[33].main.humidity,
@@ -365,38 +354,136 @@ function getForecastedHighs() {
   ];
   day5HighHum = Math.max.apply(null, day5Hums);
 
+  day1Desc = forecastData.list[0].weather[0].description
+  day2Desc = forecastData.list[1].weather[0].description
+  day3Desc = forecastData.list[2].weather[0].description
+  day4Desc = forecastData.list[3].weather[0].description
+  day5Desc = forecastData.list[4].weather[0].description
+
   displayForecastedHighs();
 }
 
-function runConditionalFormatting() {
-  console.log(currentData.current.uvi);
-  currentUvEl.className = "";
+var imgMostlyCloudy = "./assets/images/mostlycloudy.jpg";
+var imgMostlySunny = "./assets/images/mostlysunny.jpg";
+var imgRain = "./assets/images/rain.jpg";
+var imgSnow = "./assets/images/snow.jpg";
+var imgSunny = "./assets/images/sunny.jpg";
+var imgThunderstorm = "./assets/images/thunderstorm.jpg";
+var imgFoggy = "./assets/images/foggy.jpg";
+var imgOvercast = "./assets/images/overcast.jpg"
+var imgOther = "./assets/images/other.jpg";
 
-  if (currentData.current.uvi <= 3.00) {
-    currentUvEl.classList.add("btn", "btn-primary");
-  } else if (currentData.current.uvi > 3.00 && currentData.current.uvi <= 7.00) {
-    currentUvEl.classList.add("btn", "btn-warning");
-  } else if (currentData.current.uvi > 7.00) {
-    currentUvEl.classList.add("btn", "btn-danger");
+function updateForecastImages (n) {
+  if (day1Desc == "clear sky" || day1Desc == "sunny") {
+    day1ImgEl.src = imgSunny;
+  } else if (day1Desc.includes("rain") == true) {
+    day1ImgEl.src = imgRain;
+  } else if (day1Desc.includes("clouds") == true) {
+    day1ImgEl.src = imgMostlyCloudy;
+  } else if (day1Desc.includes("snow") == true) {
+    day1ImgEl.src = imgSnow;
+  } else if (day1Desc.includes("overcast") == true) {
+    day1ImgEl.src = imgOvercast;
+  } else if (day1Desc.includes("storm") == true) {
+    day1ImgEl.src = imgThunderstorm;
+  } else if (day1Desc.includes("fog") == true) {
+    day1ImgEl.src = imgFoggy;
+  } else {
+    day1ImgEl.src = imgOther;
   }
-  currentUvEl.classList.add("btn", "btn-dark");
-  /* if (currentData.current.weather[0].main = "Fog") {
-    
-  } */
-}
 
+  if (day2Desc == "clear sky" || day2Desc == "sunny") {
+    day2ImgEl.src = imgSunny;
+  } else if (day2Desc.includes("rain") == true) {
+    day2ImgEl.src = imgRain;
+  } else if (day2Desc.includes("clouds") == true) {
+    day2ImgEl.src = imgMostlyCloudy;
+  } else if (day2Desc.includes("snow") == true) {
+    day2ImgEl.src = imgSnow;
+  } else if (day2Desc.includes("overcast") == true) {
+    day2ImgEl.src = imgOvercast;
+  } else if (day2Desc.includes("storm") == true) {
+    day2ImgEl.src = imgThunderstorm;
+  } else if (day2Desc.includes("fog") == true) {
+    day2ImgEl.src = imgFoggy;
+  } else {
+    day2ImgEl.src = imgOther;
+  }
+
+  if (day3Desc == "clear sky" || day3Desc == "sunny") {
+    day3ImgEl.src = imgSunny;
+  } else if (day3Desc.includes("rain") == true) {
+    day3ImgEl.src = imgRain;
+  } else if (day3Desc.includes("clouds") == true) {
+    day3ImgEl.src = imgMostlyCloudy;
+  } else if (day3Desc.includes("snow") == true) {
+    day3ImgEl.src = imgSnow;
+  } else if (day3Desc.includes("overcast") == true) {
+    day3ImgEl.src = imgOvercast;
+  } else if (day3Desc.includes("storm") == true) {
+    day3ImgEl.src = imgThunderstorm;
+  } else if (day3Desc.includes("fog") == true) {
+    day3ImgEl.src = imgFoggy;
+  } else {
+    day3ImgEl.src = imgOther;
+  }
+
+  if (day4Desc == "clear sky" || day4Desc == "sunny") {
+    day4ImgEl.src = imgSunny;
+  } else if (day4Desc.includes("rain") == true) {
+    day4ImgEl.src = imgRain;
+  } else if (day4Desc.includes("clouds") == true) {
+    day4ImgEl.src = imgMostlyCloudy;
+  } else if (day4Desc.includes("snow") == true) {
+    day4ImgEl.src = imgSnow;
+  } else if (day4Desc.includes("overcast") == true) {
+    day4ImgEl.src = imgOvercast;
+  } else if (day4Desc.includes("storm") == true) {
+    day4ImgEl.src = imgThunderstorm;
+  } else if (day4Desc.includes("fog") == true) {
+    day4ImgEl.src = imgFoggy;
+  } else {
+    day4ImgEl.src = imgOther;
+  }
+
+  if (day5Desc == "clear sky" || day5Desc == "sunny") {
+    day5ImgEl.src = imgSunny;
+  } else if (day5Desc.includes("rain") == true) {
+    day5ImgEl.src = imgRain;
+  } else if (day5Desc.includes("clouds") == true) {
+    day5ImgEl.src = imgMostlyCloudy;
+  } else if (day5Desc.includes("snow") == true) {
+    day5ImgEl.src = imgSnow;
+  } else if (day5Desc.includes("overcast") == true) {
+    day5ImgEl.src = imgOvercast;
+  } else if (day5Desc.includes("storm") == true) {
+    day5ImgEl.src = imgThunderstorm;
+  } else if (day5Desc.includes("fog") == true) {
+    day5ImgEl.src = imgFoggy;
+  } else {
+    day5ImgEl.src = imgOther;
+  }
+
+
+
+};
+
+var uvIndexBtn = document.getElementById("current-uv");
+uvIndexBtn.onclick = function() {
+  console.log("clicked on the UV BUTTON");
+  window.open("https://www.weather.gov/rah/uv", "_blank").focus();
+}
 
 function printCurrentDataToDisplay () {
   console.log("printing the data to the screen");
   currentDateEl.textContent = currentDate;
-  currentTempEl.textContent = currentTemp;
-  currentWindEl.textContent = currentWind;
-  currentHumidityEl.textContent = currentHumidity;
+  currentTempEl.textContent = currentTemp + "℉";
+  currentWindEl.textContent = currentWind + "mph";
+  currentHumidityEl.textContent = currentHumidity + "%rh";
   currentUvEl.textContent = currentUVindex;
   currentCityEl.textContent = cityName;
   console.log("FINISHED printing the data to the screen");
   clearAllInputs();
-  // setTimeout(runConditionalFormatting(), 200);
 
   console.log(currentUVindex);
   currentUvEl.className = "";
@@ -408,7 +495,13 @@ function printCurrentDataToDisplay () {
   } else if (currentUVindex > 7.00) {
     currentUvEl.classList.add("btn", "btn-danger");
   } else {currentUvEl.classList.add("btn", "btn-dark");}
-  return;
+
+  console.log("day 1 desciption is: " + day1Desc);
+  console.log("day 2 desciption is: " + day2Desc);
+  console.log("day 3 desciption is: " + day3Desc);
+  console.log("day 4 desciption is: " + day4Desc);
+  console.log("day 5 desciption is: " + day5Desc);
+  updateForecastImages();
 }
 
 function distributeCurrentData (w) {
@@ -478,7 +571,7 @@ function getDataFromZIP (zip) {
     .then(function (zipData) {
       dataFromZIP = zipData;
       console.log(dataFromZIP);
-      if (dataFromZIP.cod == "404" || dataFromZIP.message == "city not found") {
+      if (dataFromZIP.cod == "404" || dataFromZIP.message == "city not found" || dataFromZIP.message == "invalid zip code") {
         // PUT A MODAL INSTRUCTION HERE
         console.log("The city you gave cannot be found. Check your spelling...?");
         showErrorModal();
@@ -498,7 +591,7 @@ function getDataFromCityState (cS) {
   .then(function (data) {
     dataFromCityState = data;
     console.log(dataFromCityState);
-    if (dataFromCityState.cod == "404" || dataFromCityState.message == "city not found") {
+    if (dataFromCityState.cod == "404" || dataFromCityState.message == "city not found" || dataFromCityState.message == "invalid zip code") {
       console.log("The city you gave cannot be found. Check your spelling...?");
       showErrorModal();
     } else {
