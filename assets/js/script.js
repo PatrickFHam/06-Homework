@@ -102,7 +102,7 @@ var cityState = city + "," + state + "," + countryCode;
 var zipCode;
 
 var urlFromZIP;
-var urlFromCityState = "http://api.openweathermap.org/data/2.5/weather?q=" + cityState + "&appid=" + apiKey;
+var urlFromCityState = "https://api.openweathermap.org/data/2.5/weather?q=" + cityState + "&appid=" + apiKey;
 var currentURL;
 var forecastURL;
 
@@ -578,7 +578,7 @@ function makeLatLonFromCityState (dataFromCityState) {
 
 // INTERMEDIATE DATA TO MAKE LAT/LONG FROM ZIP, FROM API
 function getDataFromZIP (zip) {
-  urlFromZIP = "http://api.openweathermap.org/data/2.5/weather?zip=" + zip + "," + countryCode + "&appid=" + apiKey;
+  urlFromZIP = "https://api.openweathermap.org/data/2.5/weather?zip=" + zip + "," + countryCode + "&appid=" + apiKey;
   fetch(urlFromZIP)
     .then(function (zipResponse) {
       return zipResponse.json();
@@ -599,7 +599,7 @@ function getDataFromZIP (zip) {
 
 // INTERMEDIATE DATA TO MAKE LAT/LONG FROM CITY,STATE, FROM API
 function getDataFromCityState (cS) {
-  urlFromCityState = "http://api.openweathermap.org/data/2.5/weather?q=" + cS + "&appid=" + apiKey;
+  urlFromCityState = "https://api.openweathermap.org/data/2.5/weather?q=" + cS + "&appid=" + apiKey;
   fetch(urlFromCityState)
   .then(function (response) {
     return response.json();
