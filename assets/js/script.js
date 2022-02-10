@@ -1,3 +1,4 @@
+// LONG LIST, LINKING HTML ELEMENTS TO JS
 var userInputEl = document.getElementById("user-input");
 var searchButtonEl = document.getElementById("search-button");
 
@@ -81,14 +82,17 @@ var day3Desc = '';
 var day4Desc = '';
 var day5Desc = '';
 
-var emojiMostlyCloudy = "fas fa-cloud-sun";
+// UN-USED EMOJIS, (decided against them, did card images instead)
+/* var emojiMostlyCloudy = "fas fa-cloud-sun";
 var emojiMostlySunny = "fas fa-cloud-sun";
 var emojiRain = "fas fa-cloud-rain";
 var emojiSnow = "fas fa-snowflake";
 var emojiSunny = "fas fa-sun";
 var emojiThunderstorm = "fas fa-bolt";
-var emojiOther = "fas fa-cloud-meatball";
+var emojiOther = "fas fa-cloud-meatball"; */
 
+
+// EMPTY OR PREPARED CONSTANTS/VARIABLES FOR LATER
 const apiKey = "52828bd95a263fd4260316440728f92b";
 var userInput = '';
 var city;
@@ -171,7 +175,7 @@ function getForecastedHighs() {
   day4DateEl.textContent = (moment().add(4, 'days').format("MMM Do YY"));
   day5DateEl.textContent = (moment().add(5, 'days').format("MMM Do YY"));
   
-  // TEMPS
+  // TEMPS ... hi-temp calculation
   day1Temps = [
     forecastData.list[0].main.temp,
     forecastData.list[1].main.temp,
@@ -232,7 +236,7 @@ function getForecastedHighs() {
   ];
   day5HighTemp = Math.max.apply(null, day5Temps);
   
-  // WINDS
+  // WINDS ... hi-winds calculation
   day1Winds = [
     forecastData.list[0].wind.speed,
     forecastData.list[1].wind.speed,
@@ -293,7 +297,7 @@ function getForecastedHighs() {
   ];
   day5HighWind = Math.max.apply(null, day5Winds);
   
-  // HUMIDITIES
+  // HUMIDITIES ... hi-humidity calculation
   day1Hums = [
     forecastData.list[0].main.humidity,
     forecastData.list[1].main.humidity,
@@ -363,6 +367,7 @@ function getForecastedHighs() {
   displayForecastedHighs();
 }
 
+// IMAGES FOR FORECAST CARDS
 var imgMostlyCloudy = "./assets/images/mostlycloudy.jpg";
 var imgMostlySunny = "./assets/images/mostlysunny.jpg";
 var imgRain = "./assets/images/rain.jpg";
@@ -373,6 +378,7 @@ var imgFoggy = "./assets/images/foggy.jpg";
 var imgOvercast = "./assets/images/overcast.jpg"
 var imgOther = "./assets/images/other.jpg";
 
+// LOGIC FOR CONDITIONAL FORMATTING FROM WEATHER CONDITIONS
 function updateForecastImages (n) {
   if (day1Desc == "clear sky" || day1Desc == "sunny") {
     day1ImgEl.src = imgSunny;
@@ -468,12 +474,14 @@ function updateForecastImages (n) {
 
 };
 
+// EVENT LISTENER FOR UV INDEX BUTTON
 var uvIndexBtn = document.getElementById("current-uv");
 uvIndexBtn.onclick = function() {
   console.log("clicked on the UV BUTTON");
   window.open("https://www.weather.gov/rah/uv", "_blank").focus();
 }
 
+// DRAWS ALL DATA TO THE SCREEN, logic for UV index, too
 function printCurrentDataToDisplay () {
   console.log("printing the data to the screen");
   currentDateEl.textContent = currentDate;
@@ -504,6 +512,7 @@ function printCurrentDataToDisplay () {
   updateForecastImages();
 }
 
+// APPLIES CURRENT WEATHER DATA TO VARIABLES, DELAY FOR CALLED FUNCTIONS (sync issue)
 function distributeCurrentData (w) {
   currentMain = w.current.weather[0].description;
   currentTemp = w.current.temp;
@@ -515,11 +524,14 @@ function distributeCurrentData (w) {
   setTimeout(getForecastedHighs(), 200);
 };
 
+// APPLIES FORECASTED WEATHER DATA TO VARIABLES, DELAY FOR CALLED FUNCTIONS (sync issue)
 function distributeForecastData (f) {
   console.log("distributed forecasted data");
   setTimeout(printCurrentDataToDisplay(), 500);
 }
 
+// PULLS BOTH CURRENT AND FORECASTED WEATHER DATA FROM API
+// ALSO, SINCE INPUT DATA WAS FILTERED AND MANIPULATED, IT CAN BE STORED TO L.S.
 function pullAllWeatherData () {
   fetch(currentURL)
   .then(function (response1) {
@@ -546,6 +558,7 @@ function pullAllWeatherData () {
   })
 };
 
+// CALCULATES THE LATITUDE AND LONGITUDE FOR THE API CALL
 function makeLatLonFromZIP (zipData) {
   latitude = zipData.coord.lat;
   longitude = zipData.coord.lon;
@@ -554,6 +567,7 @@ function makeLatLonFromZIP (zipData) {
   pullAllWeatherData ();
 };
 
+// GENERATES LAT/LON from CityState Data.
 function makeLatLonFromCityState (dataFromCityState) {
   latitude = dataFromCityState.coord.lat;
   longitude = dataFromCityState.coord.lon;
@@ -562,6 +576,7 @@ function makeLatLonFromCityState (dataFromCityState) {
   pullAllWeatherData ();
 };
 
+// INTERMEDIATE DATA TO MAKE LAT/LONG FROM ZIP, FROM API
 function getDataFromZIP (zip) {
   urlFromZIP = "http://api.openweathermap.org/data/2.5/weather?zip=" + zip + "," + countryCode + "&appid=" + apiKey;
   fetch(urlFromZIP)
@@ -580,8 +595,9 @@ function getDataFromZIP (zip) {
       makeLatLonFromZIP(dataFromZIP);
       return dataFromZIP;
     });
-  };
-  
+};
+
+// INTERMEDIATE DATA TO MAKE LAT/LONG FROM CITY,STATE, FROM API
 function getDataFromCityState (cS) {
   urlFromCityState = "http://api.openweathermap.org/data/2.5/weather?q=" + cS + "&appid=" + apiKey;
   fetch(urlFromCityState)
@@ -601,7 +617,7 @@ function getDataFromCityState (cS) {
   });
 };
 
-
+// RE-FORMATS THE USER INPUT OF A CITY,STATE
 function convertUserInput () {
   cityStateArr = [];
   // userInput = userInputEl.value;
@@ -622,6 +638,8 @@ function runWithCityState () {
   convertUserInput();
 };
 
+// THIS HAS THREE OUTCOMES: (1) zip, (2) city,state, (3) unknown
+// prescribes actions on outcomes
 function storeUserInput () {
   console.log("re-declaring that user input is: " + userInput);
   if (!isNaN(userInput)) {
@@ -645,14 +663,15 @@ function storeUserInput () {
     clearAllInputs();
     showErrorModal();
     return userInput;
-    };
   };
+};
 
 function runApp () {
   displaySearchHistory();
   storeUserInput();
 };
 
+// ONCLICK FUNCTION FOR SEARCH BAR
 searchButtonEl.onclick = function() {
   console.log("clicked SEARCH")
   console.log("input is " + userInputEl.value);
@@ -660,6 +679,7 @@ searchButtonEl.onclick = function() {
   runApp();
 };
 
+// ADDS THE ENTER-BUTTON FOR INPUT
 userInputEl.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
    event.preventDefault();
@@ -667,6 +687,7 @@ userInputEl.addEventListener("keyup", function(event) {
   };
 });
 
+// ON-CLICKs FOR STORED SEARCHES
 searchedCityButton1El.onclick = function () {userInput = storedSearches[0]; runApp();}
 searchedCityButton2El.onclick = function () {userInput = storedSearches[1]; runApp();}
 searchedCityButton3El.onclick = function () {userInput = storedSearches[2]; runApp();}
@@ -677,6 +698,7 @@ searchedCityButton7El.onclick = function () {userInput = storedSearches[6]; runA
 searchedCityButton8El.onclick = function () {userInput = storedSearches[7]; runApp();}
 
 
+// MODAL for ERRORS
 function showErrorModal () {
   clearAllInputs();
   displaySearchHistory();
@@ -687,6 +709,8 @@ var errorInputModal = new bootstrap.Modal(document.getElementById('bad-input-mod
 var tryAgainBtnEl = document.getElementById("try-again-btn");
 var userInputAgainEl = document.getElementById("user-input-again");
 
+
+// USER STORAGE of RECENT SEARCHES
 var storedSearches = JSON.parse(localStorage.getItem("lsStoredWeatherSearches")) || [];
 var mostRecentSearch = localStorage.getItem("lsMostRecentWeatherSearch");
 
@@ -720,4 +744,5 @@ function onPageLoad () {
   displaySearchHistory();
 }
 
+// PAGE IS PREPARED on load/reload
 onPageLoad();
