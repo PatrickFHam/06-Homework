@@ -1,14 +1,11 @@
-main {
-  display: flex;
-  flex-direction: row;
-}
-
-span {
+/* span {
   font-weight: 500;
+} */
+
+#search-container {
+  background-color: rgb(211, 211, 211);
 }
 
-/* .bg-image {
-  background-image: url("../images/other.jpg");
-  width: 100%;
-  height: auto;
-} */
+#weather-info-container {
+  background-color:rgb(236, 236, 236);
+}

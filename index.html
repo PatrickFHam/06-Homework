@@ -5,48 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link type="stylesheet" src="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 
     <title>Weather Dashboard</title>
   </head>
   <body>
     
-    <header class="bg-image d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom" style="background-image: url(./assets/images/other.jpg)">
+    <header class="bg-image d-flex flex-wrap justify-content-center py-3 border-bottom" style="background-image: url(./assets/images/other.jpg)">
       <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
         <h1 class="fs-4 btn btn-light btn-lg">Weather Dashboard</h1>
       </a>
 
       <ul class="nav nav-pills">
-        <li class="nav-item"><a href="https://patrickfham.github.io/06-Homework" class="nav-link active" aria-current="page">Home</a></li>
+        <li class="nav-item"><a href="https://patrickfham.github.io/WeatherDashboard" class="nav-link active" aria-current="page">Home</a></li>
         <li class="nav-item"><a href="https://openweathermap.org/api" target="_blank" class="nav-link">API Info</a></li>
         <li class="nav-item"><a href="https://github.com/PatrickFHam" target="_blank" class="nav-link">About Me</a></li>
       </ul>
     </header>
 
     <main>
-      <div class="row">
-        <div id="search-container" class="col-2 container-sm">
-          <div class="ms-5">
+      <div id="mainbox" class="">
+        <div id="search-container" class="row justify-content-evenly">
+          <div id="input-container" class="container col-6 ps-5 pe-1 py-3">
             <label for="city-search" class="form-label">City or ZIP Code</label>
             <input type="city" class="form-control" id="user-input" aria-describedby="city">
             <div id="city" class="form-text">Cities should have a comma and state name, or state abbreviation.</div>
+            <button type="button" id="search-button" class="btn btn-primary btn-lg">Search</button>
           </div>
-          <button type="button" id="search-button" class="ms-5 btn btn-primary btn-lg">Search Now</button>
-          <div id="recent-searches-container" class="mt-5 container-sm">
-            <h2>Recently-Searched Cities:</h2>
-            <button id="city1-btn" type="button" class="btn col-12 btn-outline-primary"><span id="city1-txt"></span></button>
-            <button id="city2-btn" type="button" class="btn col-12 btn-outline-primary"><span id="city2-txt"></span></button>
-            <button id="city3-btn" type="button" class="btn col-12 btn-outline-primary"><span id="city3-txt"></span></button>
-            <button id="city4-btn" type="button" class="btn col-12 btn-outline-primary"><span id="city4-txt"></span></button>
-            <button id="city5-btn" type="button" class="btn col-12 btn-outline-primary"><span id="city5-txt"></span></button>
-            <button id="city6-btn" type="button" class="btn col-12 btn-outline-primary"><span id="city6-txt"></span></button>
-            <button id="city7-btn" type="button" class="btn col-12 btn-outline-primary"><span id="city7-txt"></span></button>
-            <button id="city8-btn" type="button" class="btn col-12 btn-outline-primary"><span id="city8-txt"></span></button>
+          <div id="recent-searches-container" class="container col-6 ps-1 pe-5 py-3">
+            <h3>Recently-Searched Cities:</h3>
+            <button id="city1-btn" type="button" class="btn btn-outline-primary"><span id="city1-txt"></span></button>
+            <button id="city2-btn" type="button" class="btn btn-outline-primary"><span id="city2-txt"></span></button>
+            <button id="city3-btn" type="button" class="btn btn-outline-primary"><span id="city3-txt"></span></button>
+            <button id="city4-btn" type="button" class="btn btn-outline-primary"><span id="city4-txt"></span></button>
+            <button id="city5-btn" type="button" class="btn btn-outline-primary"><span id="city5-txt"></span></button>
+            <button id="city6-btn" type="button" class="btn btn-outline-primary"><span id="city6-txt"></span></button>
+            <button id="city7-btn" type="button" class="btn btn-outline-primary"><span id="city7-txt"></span></button>
+            <button id="city8-btn" type="button" class="btn btn-outline-primary"><span id="city8-txt"></span></button>
           </div>
         </div>
-        <div id="weather-info-container" class="col container-lg">
-          <div id="current-weather" class="container-lg">
+        <div id="weather-info-container" class="pt-5">
+          <div id="current-weather" class="container">
             <h2><span id="current-city"></span> ... <br><span id="current-emoji"></span> ... <span id="date"></span></h2>
             <p>Temp: <span id="current-temp"></span></p>
             <p>Wind: <span id="current-wind"></span></p>
@@ -55,7 +55,7 @@
           </div>
           <div id="forecast" class="container-lg">
             <h2>5-Day Forecast:</h2>
-            <div class="forecast-cards row row-cols-1 row-cols-md-5 g-4">
+            <div class="forecast-cards row row-cols-1 row-cols-sm-5 g-4">
               <div id="day-1" class="card">
                 <img id="day-1-img" src="" class="card-img img-fluid" alt="">
                 <div class="card-body">
@@ -95,18 +95,19 @@
                 <div class="card-footer">
                   <small class="text-muted"><span id="d4-date"></span></small>
                 </div>
-            </div>
-            <div id="day-5" class="card">
-              <img id="day-5-img" src="" class="card-img img-fluid" alt="">
-              <div class="card-body">
-                <h5 class="card-title"><span id="d5-day"></span></h5>
-                <p class="card-text"><span id="d5-temp"></span><br><span id="d5-wind"></span><br><span id="d5-hum"></span></p>
               </div>
-              <div class="card-footer">
-                <small class="text-muted"><span id="d5-date"></span></small>
+              <div id="day-5" class="card">
+                <img id="day-5-img" src="" class="card-img img-fluid" alt="">
+                <div class="card-body">
+                  <h5 class="card-title"><span id="d5-day"></span></h5>
+                  <p class="card-text"><span id="d5-temp"></span><br><span id="d5-wind"></span><br><span id="d5-hum"></span></p>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted"><span id="d5-date"></span></small>
+                </div>
               </div>
-            </div>
-          </div> 
+            </div> 
+          </div>
         </div>
       </div>
 
