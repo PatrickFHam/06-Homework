@@ -364,7 +364,14 @@ function getForecastedHighs() {
   day4Desc = forecastData.list[3].weather[0].description
   day5Desc = forecastData.list[4].weather[0].description
 
+  console.log("day 1 desciption is: " + day1Desc);
+  console.log("day 2 desciption is: " + day2Desc);
+  console.log("day 3 desciption is: " + day3Desc);
+  console.log("day 4 desciption is: " + day4Desc);
+  console.log("day 5 desciption is: " + day5Desc);
+
   displayForecastedHighs();
+  updateForecastImages();
 }
 
 // IMAGES FOR FORECAST CARDS
@@ -469,9 +476,6 @@ function updateForecastImages (n) {
   } else {
     day5ImgEl.src = imgOther;
   }
-
-
-
 };
 
 // EVENT LISTENER FOR UV INDEX BUTTON
@@ -503,13 +507,6 @@ function printCurrentDataToDisplay () {
   } else if (currentUVindex > 7.00) {
     currentUvEl.classList.add("btn", "btn-danger");
   } else {currentUvEl.classList.add("btn", "btn-dark");}
-
-  console.log("day 1 desciption is: " + day1Desc);
-  console.log("day 2 desciption is: " + day2Desc);
-  console.log("day 3 desciption is: " + day3Desc);
-  console.log("day 4 desciption is: " + day4Desc);
-  console.log("day 5 desciption is: " + day5Desc);
-  updateForecastImages();
 }
 
 // APPLIES CURRENT WEATHER DATA TO VARIABLES, DELAY FOR CALLED FUNCTIONS (sync issue)
@@ -521,18 +518,20 @@ function distributeCurrentData (w) {
   currentUVindex = w.current.uvi;
   console.log("distributed current data");
   setTimeout(printCurrentDataToDisplay(), 500);
-  setTimeout(getForecastedHighs(), 200);
 };
 
 // APPLIES FORECASTED WEATHER DATA TO VARIABLES, DELAY FOR CALLED FUNCTIONS (sync issue)
 function distributeForecastData (f) {
   console.log("distributed forecasted data");
-  setTimeout(printCurrentDataToDisplay(), 500);
+  getForecastedHighs();
 }
 
 // PULLS BOTH CURRENT AND FORECASTED WEATHER DATA FROM API
 // ALSO, SINCE INPUT DATA WAS FILTERED AND MANIPULATED, IT CAN BE STORED TO L.S.
 function pullAllWeatherData () {
+  console.log(currentURL);
+  console.log(forecastURL);
+  
   fetch(currentURL)
   .then(function (response1) {
     return response1.json();
@@ -554,7 +553,7 @@ function pullAllWeatherData () {
     console.log(forecastData);
     console.log("city typed in is " + forecastData.city.name);
     cityName = forecastData.city.name;
-    distributeForecastData();
+    distributeForecastData(forecastData);
   })
 };
 
@@ -562,6 +561,8 @@ function pullAllWeatherData () {
 function makeLatLonFromZIP (zipData) {
   latitude = zipData.coord.lat;
   longitude = zipData.coord.lon;
+  console.log("latitude is: " + latitude)
+  console.log("longitude is: " + longitude)
   forecastURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
   currentURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude={part}&appid=${apiKey}&units=imperial`;
   pullAllWeatherData ();
@@ -591,7 +592,9 @@ function getDataFromZIP (zip) {
         console.log("The city you gave cannot be found. Check your spelling...?");
         showErrorModal();
         return;
-      };
+      }
+    })
+    .then(function() {
       makeLatLonFromZIP(dataFromZIP);
       return dataFromZIP;
     });
@@ -620,13 +623,10 @@ function getDataFromCityState (cS) {
 // RE-FORMATS THE USER INPUT OF A CITY,STATE
 function convertUserInput () {
   cityStateArr = [];
-  // userInput = userInputEl.value;
   cityStateArr = userInput.split(",");
   city = cityStateArr[0];
   state = cityStateArr[1].replace(/ /g, '');
   cityState = city + "," + state + "," + countryCode;
-  // return cityState;
-  // cityState = userInput;
   getDataFromCityState(cityState);
 };
 
@@ -640,7 +640,7 @@ function runWithCityState () {
 
 // THIS HAS THREE OUTCOMES: (1) zip, (2) city,state, (3) unknown
 // prescribes actions on outcomes
-function storeUserInput () {
+function storeUserInput (uI) {
   console.log("re-declaring that user input is: " + userInput);
   if (!isNaN(userInput)) {
     zipCode = userInput.toString(5);
@@ -666,9 +666,9 @@ function storeUserInput () {
   };
 };
 
-function runApp () {
+function runApp (uI) {
   displaySearchHistory();
-  storeUserInput();
+  storeUserInput(uI);
 };
 
 // ONCLICK FUNCTION FOR SEARCH BAR
@@ -688,14 +688,14 @@ userInputEl.addEventListener("keyup", function(event) {
 });
 
 // ON-CLICKs FOR STORED SEARCHES
-searchedCityButton1El.onclick = function () {userInput = storedSearches[0]; runApp();}
-searchedCityButton2El.onclick = function () {userInput = storedSearches[1]; runApp();}
-searchedCityButton3El.onclick = function () {userInput = storedSearches[2]; runApp();}
-searchedCityButton4El.onclick = function () {userInput = storedSearches[3]; runApp();}
-searchedCityButton5El.onclick = function () {userInput = storedSearches[4]; runApp();}
-searchedCityButton6El.onclick = function () {userInput = storedSearches[5]; runApp();}
-searchedCityButton7El.onclick = function () {userInput = storedSearches[6]; runApp();}
-searchedCityButton8El.onclick = function () {userInput = storedSearches[7]; runApp();}
+searchedCityButton1El.onclick = function () {userInput = storedSearches[0]; runApp(userInput);}
+searchedCityButton2El.onclick = function () {userInput = storedSearches[1]; runApp(userInput);}
+searchedCityButton3El.onclick = function () {userInput = storedSearches[2]; runApp(userInput);}
+searchedCityButton4El.onclick = function () {userInput = storedSearches[3]; runApp(userInput);}
+searchedCityButton5El.onclick = function () {userInput = storedSearches[4]; runApp(userInput);}
+searchedCityButton6El.onclick = function () {userInput = storedSearches[5]; runApp(userInput);}
+searchedCityButton7El.onclick = function () {userInput = storedSearches[6]; runApp(userInput);}
+searchedCityButton8El.onclick = function () {userInput = storedSearches[7]; runApp(userInput);}
 
 
 // MODAL for ERRORS
