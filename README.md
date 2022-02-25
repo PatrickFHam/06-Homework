@@ -1,5 +1,4 @@
-# 06-Homework
-Weather Dashboard
+# Weather Dashboard
 https://patrickfham.github.io/WeatherDashboard/
 
 ## Approach
