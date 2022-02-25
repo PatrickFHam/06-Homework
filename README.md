@@ -1,5 +1,5 @@
 # Weather Dashboard
-https://patrickfham.github.io/WeatherDashboard/
+Link to the Weather Dashboard: https://patrickfham.github.io/WeatherDashboard/
 
 ## Approach
 
