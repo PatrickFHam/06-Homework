@@ -16,6 +16,14 @@ Each forecasted day's image changes to coordinate with the weather conditions of
 
 Local storage was used to save the eight(8)-most-recent searches, which are immediately searchable again by clicking on them.
 
+
+## Technologies Used
+- [OpenWeatherMap API](https://openweathermap.org/api)
+- HTML/CSS/BootStrap
+- JavaScript
+- jQuery
+- 
+
 ## Video Demo
 https://watch.screencastify.com/v/ylV6emZXBSFvgrBMQGSn
 
