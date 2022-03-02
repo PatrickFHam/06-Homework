@@ -22,7 +22,6 @@ Local storage was used to save the eight(8)-most-recent searches, which are imme
 - HTML/CSS/BootStrap
 - JavaScript
 - jQuery
-- 
 
 ## Video Demo
 https://watch.screencastify.com/v/ylV6emZXBSFvgrBMQGSn
